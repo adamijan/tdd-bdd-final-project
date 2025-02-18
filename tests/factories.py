@@ -1,3 +1,4 @@
+
 # Copyright 2016, 2022 John J. Rofrano. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +32,9 @@ class ProductFactory(factory.Factory):
         model = Product
 
     id = factory.Sequence(lambda n: n)
-   ## Add code to create Fake Products 
-      name = FuzzyChoice(
+   ## (TASK 1) Add code to create Fake Products
+   ####### 1.1 Use the FuzzyChoice attribute to create random choices of products for the name field 
+    name = FuzzyChoice(
         choices=[
             "Hat",
             "Pants",
@@ -47,9 +49,13 @@ class ProductFactory(factory.Factory):
             "Wrench"
         ]
     )
+   ######## 1.2 Use faker to get a fake text for the description field 
     description = factory.Faker("text")
+   ######## 1.3 Use the FuzzyDecimal attribute with 0.5, 2000.0, 2 as options for the price field 
     price = FuzzyDecimal(0.5, 2000.0, 2)
+   ######## 4. Use the FuzzyChoice attribute with True / False as the choices for the available field 
     available = FuzzyChoice(choices=[True, False])
+    ####### 1.4 Use the FuzzyChoice attribute to create random choices of categories
     category = FuzzyChoice(
         choices=[
             Category.UNKNOWN,
